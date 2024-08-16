@@ -13,14 +13,14 @@ namespace Persons.Controllers
         private readonly MongoService mongo;
         private readonly IMongoCollection<Person> people;
 
-        public PersonController(MongoService mongo)
+        public PersonController(MongoService ms)
         {
-            this.mongo = mongo;
+            mongo = ms;
             people = mongo.GetCollection<Person>("People");
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public IActionResult Get()
         {
             return Ok(people.Find(p => true).ToList());
         }
